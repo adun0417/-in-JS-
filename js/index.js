@@ -128,9 +128,11 @@ class Monster extends BaseCharacter{
 }
 
 // 按鍵驅動: 攻擊發起
-var skill = document.getElementById("skill");
-skill.onclick = function(){
-  heroAttack();
+function addAttackEvent(){
+  var skill = document.getElementById("skill");
+  skill.onclick = function(){
+    heroAttack();
+  }
 }
 
 // 英雄和怪物攻擊時間軸
@@ -167,10 +169,13 @@ function heroAttack(){
   }, 1100);
 }
 
-var healSkill = document.getElementById("heal");
-healSkill.onclick = function(){
-  heroHeal();
-}
+// 按鍵驅動: 英雄自補
+  var healSkill = document.getElementById("heal");
+  healSkill.onclick = function(){
+    heroHeal();
+  }
+
+
 
 function heroHeal(){
   document.getElementsByClassName("skill-block")[0].style.display = "none";
@@ -226,6 +231,17 @@ function finish(){
   }
 }
 
+document.onkeyup = function(event){
+  var key = String.fromCharCode(event.keyCode);
+  if (key == "A") {
+     heroAttack();
+  }
+  else if (key == "D") {
+    heroHeal();
+  }
+}
+
+addAttackEvent();
 var rounds = 10;
 hero = new Hero("Bernard", 130, 30);
 monster = new Monster("Skeleton", 130, 30);
